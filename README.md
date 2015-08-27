@@ -468,79 +468,79 @@ The Validate widget will work on other types of fields that aren't text.
    });
  ```
 
- #### Field validation
- All form fields can be validated by adding `data-validate` to them.
- ```html
+#### Field validation
+All form fields can be validated by adding `data-validate` to them.
+```html
+<label>
+ Most Basic validation:
+ <input type="text" name="most-basic" placeholder="basic validation" data-validate>
+</label>
+```
+To make a form field required, simply add "required" to the field as you would with html5
+```html
+<label>
+ Basic "required" validation:
+ <input type="text" name="most-basic-required" placeholder="basic REQUIRED validation" required data-validate>
+</label>
+```
+To change a field from being required to not required, simply change the option.
+```js
+$("#inputSelector").validate("option", "required", false);
+```
+
+### Validating specific types of fields
+There are several ways to validate a particular type of field.
+
+The easiest way (and preferred method) is to specify the correct "type" in your input field, like so:
+```html
+<label>
+ Validate an email address:
+ <input type="email" name="email-basic" value="" data-validate/>
+</label>
+```
+
+The second way to validate a field is by passing in a "pattern" (also an html5)
+```html
+<label>
+ Validate a number between 1 and 5:
+ <input type="number" name="num-basic-pattern" value="" pattern="/^[1-5]{1}$/" data-validate/>
+</label>
+```
+
+The third way to validate a field to to pass in a preset pattern using `data-validatetype`. [Available Presets](#preset)
+```html
+<label>
+ Validates a Canadian or USA Zip code:
+ <input type="text" name="text-validate-can-usa" data-validate data-validatetype="postalcode(USA,CAN)" placeholder="Enter a canadian or USA zip code"/>
+</label>
+```
+
+If all else fails, the final way to validate a field is to create a custom function to do any validation necessary. The function should be bound with the event `validatecustom`, which fires at the end of `validate`, giving the developer the ability to change the validity to whatever is necessary.
+
+Example of ensuring one field matches another:
+```html
+<section class="custom-validation">
  <label>
-   Most Basic validation:
-   <input type="text" name="most-basic" placeholder="basic validation" data-validate>
+  Enter a number:
+  <input type="number" name="cust-validate" value="" pattern="[0-9]*" required data-validate>
+ </label>
+ <label>
+  Validates this field matches the field above:
+  <input type="number" name="cust-validate-confirm" value="" pattern="[0-9]*" required data-validate>
  </label>
  ```
- To make a form field required, simply add "required" to the field as you would with html5
- ```html
- <label>
-   Basic "required" validation:
-   <input type="text" name="most-basic-required" placeholder="basic REQUIRED validation" required data-validate>
- </label>
- ```
- To change a field from being required to not required, simply change the option.
  ```js
- $("#inputSelector").validate("option", "required", false);
-  ```
-
-  ### Validating specific types of fields
-  There are several ways to validate a particular type of field.
-
-  The easiest way (and preferred method) is to specify the correct "type" in your input field, like so:
-  ```html
-  <label>
-   Validate an email address:
-   <input type="email" name="email-basic" value="" data-validate/>
-  </label>
-  ```
-
-  The second way to validate a field is by passing in a "pattern" (also an html5)
-  ```html
-  <label>
-   Validate a number between 1 and 5:
-   <input type="number" name="num-basic-pattern" value="" pattern="/^[1-5]{1}$/" data-validate/>
-  </label>
-  ```
-
-  The third way to validate a field to to pass in a preset pattern using `data-validatetype`. [Available Presets](#preset)
-  ```html
-  <label>
-   Validates a Canadian or USA Zip code:
-   <input type="text" name="text-validate-can-usa" data-validate data-validatetype="postalcode(USA,CAN)" placeholder="Enter a canadian or USA zip code"/>
-  </label>
-  ```
-
-  If all else fails, the final way to validate a field is to create a custom function to do any validation necessary. The function should be bound with the event `validatecustom`, which fires at the end of `validate`, giving the developer the ability to change the validity to whatever is necessary.
-
-  Example of ensuring one field matches another:
-  ```html
-  <section class="custom-validation">
-   <label>
-    Enter a number:
-    <input type="number" name="cust-validate" value="" pattern="[0-9]*" required data-validate>
-   </label>
-   <label>
-    Validates this field matches the field above:
-    <input type="number" name="cust-validate-confirm" value="" pattern="[0-9]*" required data-validate>
-   </label>
-   ```
-   ```js
-   $(document).on("ready", function(e){
-    var $validate = $("section.custom-validation"),
-        $input1 = $validate.find("input[name=cust-validate]"),
-        $input2 = $validate.find("input[name=cust-validate-confirm]");
-    $validate
-     .on("change", "input[name=cust-validate]", function(e){
-      $input2.validate("validate");
-     })
-     .on("validatecustom", "input[name=cust-validate-confirm]", function(e){
-      var $obj = $(this);
-      $obj.validate("setValid", $obj.val() === $input1.val() ? true : false);
-     });
+ $(document).on("ready", function(e){
+  var $validate = $("section.custom-validation"),
+      $input1 = $validate.find("input[name=cust-validate]"),
+      $input2 = $validate.find("input[name=cust-validate-confirm]");
+  $validate
+   .on("change", "input[name=cust-validate]", function(e){
+    $input2.validate("validate");
+   })
+   .on("validatecustom", "input[name=cust-validate-confirm]", function(e){
+    var $obj = $(this);
+    $obj.validate("setValid", $obj.val() === $input1.val() ? true : false);
    });
-  ```
+ });
+```
