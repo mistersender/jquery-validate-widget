@@ -268,7 +268,7 @@ It's simple to add messaging to a field by adding a `data-validatemessageinvalid
 If you would like to change the message *after* the widget has loaded, simply change the `option`. For example, *using the above `html`*, the script below will change the zip code's validation and error/success messaging when the radio buttons are changed.
 ```js
  $(document).on("pageinit", function(e){
-  var $validate = $("##styleguide"),
+  var $validate = $("#container"),
       messages = {
        error: {
         USA : "Enter a valid USA zip code (00000)",
