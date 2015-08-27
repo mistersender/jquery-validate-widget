@@ -362,71 +362,71 @@ It is possible to adjust the offset from the top of the viewport for when the wi
 ## Special Fields
 The Validate widget will work on other types of fields that aren't text.
 
-**Note:** The only fields not currently supported are `radio` inputs.
+ **Note:** The only fields not currently supported are `radio` inputs.
 
-Selects:
-```html
-<label>
-a basic required select
-<select name="select" required data-validate data-validateon="change">
- <option value="">Select a value</option>
- <option value="1">value 1</option>
- <option value="2">value 2</option>
- <option value="3">value 3</option>
-</select>
-</label>
-
-<label>
-A required select with messaging
-<select name="select" required data-validate data-validatemessagevalid="hooray!"  data-validatemessageinvalid="boo!">
- <option value="">Select a value</option>
- <option value="1">value 1</option>
- <option value="2">value 2</option>
- <option value="3">value 3</option>
-</select>
-</label>
-```
-Textareas:
-```html
-<label>
-<textarea name="textarea-validation" data-validate>a textarea with validation</textarea>
-</label>
-```
-Checkboxes:
-```html
-<label>
-Validate a checkbox (if it is or is not checked):
-<input type="checkbox" name="test-checkbox" value="1" data-validate data-validateon="change" required>
-</label>
-```
-Date Fields:
-```html
-<div id="card">
+ Selects:
+ ```html
  <label>
-   Validate a month/year:
-   <input type="month" name="theDate" value="" min="2014-11" data-validate required>
+  a basic required select
+  <select name="select" required data-validate data-validateon="change">
+   <option value="">Select a value</option>
+   <option value="1">value 1</option>
+   <option value="2">value 2</option>
+   <option value="3">value 3</option>
+  </select>
  </label>
- <fieldset data-role="fieldcontain" class="fallback-fields hide"> <!-- hide this until we know the "month" type is something the browser supports -->
-   <label for="theMonth">Fallback month/year</label>
-   <select data-inline="true" data-validate required name="theMonth" id="theMonth"><option>some months</option></select>
-   <select data-inline="true" data-validate required name="theYear"><option>some years</option></select>
- </fieldset>
-</div>
-```
-```js
-$(document).ready(function(){
- var $card = $("#card"),
-     $theDate = $card.find("input[name=theDate]");
- if($theDate.attr("type") === "month"){ // only show if type="month" is supported
-  $card.find(".date-fields").remove();
- }
- else{ // if it's not supported, remove it.
-  $theDate
-   .parents("label:first")
-    .remove();
- }
-});
-```
+
+ <label>
+  A required select with messaging
+  <select name="select" required data-validate data-validatemessagevalid="hooray!"  data-validatemessageinvalid="boo!">
+   <option value="">Select a value</option>
+   <option value="1">value 1</option>
+   <option value="2">value 2</option>
+   <option value="3">value 3</option>
+  </select>
+ </label>
+ ```
+ Textareas:
+ ```html
+ <label>
+  <textarea name="textarea-validation" data-validate>a textarea with validation</textarea>
+ </label>
+ ```
+ Checkboxes:
+ ```html
+ <label>
+  Validate a checkbox (if it is or is not checked):
+  <input type="checkbox" name="test-checkbox" value="1" data-validate data-validateon="change" required>
+ </label>
+ ```
+ Date Fields:
+ ```html
+ <div id="card">
+   <label>
+     Validate a month/year:
+     <input type="month" name="theDate" value="" min="2014-11" data-validate required>
+   </label>
+   <fieldset data-role="fieldcontain" class="fallback-fields hide"> <!-- hide this until we know the "month" type is something the browser supports -->
+     <label for="theMonth">Fallback month/year</label>
+     <select data-inline="true" data-validate required name="theMonth" id="theMonth"><option>some months</option></select>
+     <select data-inline="true" data-validate required name="theYear"><option>some years</option></select>
+   </fieldset>
+ </div>
+ ```
+ ```js
+  $(document).ready(function(){
+   var $card = $("#card"),
+       $theDate = $card.find("input[name=theDate]");
+   if($theDate.attr("type") === "month"){ // only show if type="month" is supported
+    $card.find(".date-fields").remove();
+   }
+   else{ // if it's not supported, remove it.
+    $theDate
+     .parents("label:first")
+      .remove();
+   }
+  });
+ ```
 
 # Examples
 
@@ -491,32 +491,6 @@ $("#inputSelector").validate("option", "required", false);
 ### Validating specific types of fields
 There are several ways to validate a particular type of field.
 
-<<<<<<< HEAD
-#### Field validation
-All form fields can be validated by adding `data-validate` to them.
-```html
-<label>
- Most Basic validation:
- <input type="text" name="most-basic" placeholder="basic validation" data-validate>
-</label>
-```
-To make a form field required, simply add "required" to the field as you would with html5
-```html
-<label>
- Basic "required" validation:
- <input type="text" name="most-basic-required" placeholder="basic REQUIRED validation" required data-validate>
-</label>
-```
-To change a field from being required to not required, simply change the option.
-```js
-$("#inputSelector").validate("option", "required", false);
-```
-
-### Validating specific types of fields
-There are several ways to validate a particular type of field.
-
-=======
->>>>>>> fixed a markdown issue in the readme
 The easiest way (and preferred method) is to specify the correct "type" in your input field, like so:
 ```html
 <label>
