@@ -1,0 +1,86 @@
+<!doctype html>
+ <html lang="en">
+ <head>
+ <title>jQuery Validate Widget Examples</title>
+  <meta charset="utf-8">
+  <meta http-equiv="cleartype" content="on">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="jQuery Validate Widget Examples">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="format-detection" content="address=no">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="../prod/site.min.css">
+  <link rel="stylesheet" href="../prod/jquery_validate.min.css">
+  <script src="../prod/jquery-2.1.4.min.js"></script>
+  <script src="../prod/jqueryUI_factory-only-v1.11.4.min.js"></script>
+  <script src="../prod/jqueryui.validate.min.js"></script>
+ </head>
+ <body itemscope itemtype="http://schema.org/WebPage">
+  <main id="s-content" class="s-content l-wrapper" itemscope itemtype="http://schema.org/WebPageElement" itemprop="mainContentOfPage" role="main">
+
+<h1>Validate Widget</h1>
+<p><b>Note:</b> Make sure each field has a wrapper. In many frameworks (like jQuery mobile), this is done for you at ready.</p>
+
+<h2>Complex Validation</h2>
+<form name="post_code_validation" id="post_code_validate" method="post" action="#" data-validate>
+ <p> In this example, the validation for the form field changes based on the user's choice of country. Toggle between the two countries to see the validation change on the fly.</p>
+ <p>See the form messaging change by scrolling to the bottom of the page.</p>
+ <label>
+  <div class="c-input">
+   <input type="text" name="post_code" data-validate  data-validatetype="postalcode(CAN)" data-validatemessageinvalid="Please enter a Canadian Postal Code (A0A0A0)" data-validatemessagevalid="You have entered a valid Canadian Poastal Code" placeholder="Enter a Post Code" data-validatedisplayname="CAN Post Code" required>
+  </div>
+ </label>
+ <fieldset>
+  <label class="c-radio">
+   <input type="radio" name="post_code_type" value="USA"> USA Zip Code
+  </label>
+  <label  class="c-radio">
+   <input type="radio" name="post_code_type" value="CAN" checked> Canada Post Code
+  </label>
+ </fieldset>
+ <button class="c-btn">Submit</button>
+ <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</form>
+<script>
+ $(document).on("ready", function(e){
+  var $validate = $("#post_code_validate"), // cache our form
+      messages = {
+       error: {
+        USA : "Enter a valid USA zip code (00000)",
+        CAN : "Enter a valid Canadian post code (A0A0A0)"
+       },
+       success: {
+        USA : "You have entered a valid USA zip code",
+        CAN : "You have entered a valid Canadian post code"
+       }
+      },
+      types = {
+       USA: "postalcode(USA)",
+       CAN: "postalcode(CAN)"
+      },
+      display = {
+        USA: "USA Zip Code",
+        CAN: "Canada Post Code"
+      }
+      $code = $validate.find("input[name=post_code]");
+  $validate.on("change", "input[name=post_code_type]", function(e){
+   var val = $(this).val();
+   // change all the options we need to on the field
+   $code
+    .validate("option", {
+     validatemessageinvalid: messages.error[val],
+     validatemessagevalid: messages.success[val],
+     validatedisplayname: display[val],
+     validatetype: types[val]
+    })
+    .validate("validate"); // revalidate the field
+  });
+ });
+</script>
+
+ </main>
+</body>
+</html>

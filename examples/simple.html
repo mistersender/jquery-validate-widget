@@ -1,0 +1,157 @@
+
+
+<!doctype html>
+ <html lang="en">
+ <head>
+ <title>jQuery Validate Widget Examples</title>
+  <meta charset="utf-8">
+  <meta http-equiv="cleartype" content="on">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="jQuery Validate Widget Examples">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="format-detection" content="address=no">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="../prod/normalize.min.css">
+  <link rel="stylesheet" href="../prod/site.min.css">
+  <link rel="stylesheet" href="../prod/jquery_validate.min.css">
+  <script src="../prod/jquery-2.1.4.min.js"></script>
+  <script src="../prod/jqueryUI_factory-only-v1.11.4.min.js"></script>
+  <script src="../prod/jqueryui.validate.min.js"></script>
+ </head>
+ <body itemscope itemtype="http://schema.org/WebPage">
+  <main id="s-content" class="s-content l-wrapper" itemscope itemtype="http://schema.org/WebPageElement" itemprop="mainContentOfPage" role="main">
+
+<h1>Validate Widget</h1>
+<p><b>Note:</b> Make sure each field has a wrapper. In many frameworks (like jQuery mobile), this is done for you at ready.</p>
+
+<h2>Basic Validation</h2>
+<form name="basicForm" method="get" action="#" data-validate>
+  <p>Everything in this form has minimum validation applied to it.</p>
+  <label>
+    Basic Validation
+    <div class="c-input">
+     <input type="text" name="test" placeholder="Bare Bones validation" data-validate>
+    </div>
+  </label>
+  <label>
+    Email
+    <div class="c-input">
+     <input type="email" name="test" placeholder="Email Validation" data-validate data-validatedisplayname="field label">
+    </div>
+  </label>
+  <label>
+    Select
+    <div class="c-select">
+     <span></span>
+     <select name="test" data-validate>
+      <option></option>
+      <option>Option a</option>
+      <option>Option b</option>
+      <option>Option c</option>
+     </select>
+    </div>
+  </label>
+  <label class="c-checkbox">
+    <input type="checkbox" name="test" data-validate>Checkbox
+  </label>
+  <label>
+    Some Textarea
+    <div class="c-textarea">
+      <textarea name="test" data-validate></textarea>
+    </div>
+  </label>
+  <button class="c-btn">Submit</button>
+</form>
+
+<h2>Required Validation</h2>
+<form name="basicForm" method="get" action="#" data-validate>
+  <p>All of the fields in this form are required.</p>
+  <label>
+    Basic Required
+    <div class="c-input">
+     <input type="text" name="test" placeholder="Required field" data-validate required>
+    </div>
+  </label>
+  <label>
+    Number
+    <div class="c-input">
+     <input type="number" step="any" name="test" placeholder="Required number field" data-validate required>
+    </div>
+  </label>
+  <label>
+    Select something
+    <div class="c-select">
+     <span></span>
+     <select name="test" data-validate required>
+      <option></option>
+      <option>Option a</option>
+      <option>Option b</option>
+      <option>Option c</option>
+     </select>
+   </div>
+  </label>
+  <label class="c-checkbox">
+    <input type="checkbox" name="test" data-validate required>Checkbox
+  </label>
+  <label>
+    Required Textarea
+    <div class="c-textarea">
+      <textarea name="test" data-validate required>textarea</textarea>
+    </div>
+  </label>
+  <button class="c-btn">Submit</button>
+</form>
+
+<h2>Messaging</h2>
+<form name="basicForm" method="get" action="#" data-validate>
+  <p>This form has various validation messages applied to it.</p>
+  <label>
+    Create a user
+    <div class="c-input">
+     <input type="text" name="test" placeholder="Enter a username" data-validate required data-validatemessagevalid="This username is available!"  data-validatemessagevalid="Sorry, this username isn't available">
+    </div>
+  </label>
+  <label>
+    Email:
+    <div class="c-input">
+     <input type="email" name="test" placeholder="Required email field" data-validate required data-validatemessageinvalid="You didn't enter an email">
+    </div>
+  </label>
+  <label>
+    Options
+    <div class="c-select">
+     <span></span>
+     <select name="test" data-validate required data-validatemessageinvalid="Enter at least one option">
+      <option></option>
+      <option>Option a</option>
+      <option>Option b</option>
+      <option>Option c</option>
+     </select>
+    </div>
+  </label>
+  <label class="c-checkbox">
+    <input type="checkbox" name="test" data-validate required  data-validatemessageinvalid="You must agree to our terms to continue">Checkbox
+  </label>
+  <label>
+    Feedback
+    <div class="c-textarea" data-validatemessagevalid="Thank you for your feedback!">
+      <textarea name="test" data-validate required>textarea</textarea>
+    </div>
+  </label>
+  <button class="c-btn">Submit</button>
+</form>
+
+<script>
+$(document).ready(function(){
+  //create a delegated event to change selects
+  $("body").on("change input", "select", function(e){
+   this.previousElementSibling.textContent = this.options[this.selectedIndex].text;
+  });
+});
+</script>
+ </main>
+</body>
+</html>
