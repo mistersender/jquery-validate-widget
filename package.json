@@ -1,0 +1,30 @@
+{
+  "name": "jquery-validate-widget",
+  "version": "1.0.0",
+  "description": "Flexible Form Validation Via The JQuery Widget Factory",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mistersender/jquery-validate-widget.git"
+  },
+  "keywords": [
+    "jQuery",
+    "Widgets",
+    "jQuery",
+    "UI",
+    "validation",
+    "forms"
+  ],
+  "author": "Jessica Kennedy <jessica.kennedy@inmar.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mistersender/jquery-validate-widget/issues"
+  },
+  "homepage": "https://github.com/mistersender/jquery-validate-widget#readme"
+}
