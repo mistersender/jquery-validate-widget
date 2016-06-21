@@ -52,13 +52,14 @@
   _buildForm: function(){
    var self = this;
    self.element
+    .addClass('js-validate-section')
     .on("submit.validate, validate", function(e){
      var isValid = self._validateSection();
      isValid || self.showFirstInvalid(); //display the first invalid field if the form is not valid.
      return isValid; //maybe don't return false if this is not a form.
     })
     // add invalid elements to the list and add the "errors" element to the page
-    .on("validatedisplayinvalid.validate", "[data-validate]", function(e){
+    .on("validatedisplayinvalid.validate", ".js-validate", function(e){
      var $errors = self.element.find("." + self.invalidClass + ":not(:hidden)");
      self.$firstError = $errors.first();
      self.$lastError = $errors.last();
@@ -69,7 +70,7 @@
      }
     })
     // check to see if the now valid fields are in the invalid list and remove them.
-    .on("validatedisplayvalid.validate", "[data-validate]", function(e){
+    .on("validatedisplayvalid.validate", ".js-validate", function(e){
      var index = self.invalidDisplayed.indexOf(this),
          $errors = self.element.find("." + self.invalidClass + ":not(:hidden)");
      self.$firstError = $errors.first();
@@ -122,6 +123,7 @@
     }, 250);
    }
    self.element
+    .addClass("js-validate") // ensure data-validate attribute exists on the element, as this is used for finding fields in a section to validate.
     .on(self.options.validateon + ".validate", function(e){
      self._validateField(true);
     })
@@ -163,7 +165,7 @@
    var self = this,
        formValid = true;
    $(self.element)
-    .find("input[data-validate], textarea[data-validate], select[data-validate]")
+    .find("input.js-validate, textarea.js-validate, select.js-validate")
      .each(function(i, v){
       var $obj = $(this);
       $obj.validate("display", true); //show validated items if they're not showing.
@@ -330,7 +332,7 @@
         },
         validatedisplayname: function(){
          // refresh any sections that contain the field, as the field label has changed.
-         self.element.parents("[data-validate]:first").validate("refresh");
+         self.element.parents(".js-validate-section:first").validate("refresh");
         }
        };
    $.Widget.prototype._setOption.apply(self, arguments);
@@ -345,7 +347,8 @@
    var self = this;
    self.element
     .off(".validate, validate")
-    .removeData("validatedisplayname");
+    .removeData("validatedisplayname")
+    .removeClass("js-validate js-validate-section");
    clearInterval(self.interval);
    self.$parent
     .removeAttr("data-validatemessagevalid data-validatemessageinvalid")
